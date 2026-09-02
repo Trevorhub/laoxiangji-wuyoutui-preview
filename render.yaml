@@ -2,5 +2,5 @@ services:
   - type: web
     name: laoxiangji-wuyoutui-preview
     runtime: static
-    buildCommand: echo "Static preview site — no build"
+    buildCommand: echo "Static pages — no build"
     staticPublishPath: .
