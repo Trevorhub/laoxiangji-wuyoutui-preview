@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>无忧退协议最终稿预览</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #f4f4f4; color: #222; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+        header { padding: 18px 20px 12px; background: #fff; border-bottom: 1px solid #e6e6e6; }
+        h1 { margin: 0 0 6px; font-size: 20px; }
+        .note { margin: 0; color: #666; font-size: 13px; }
+        nav { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 20px 0; }
+        button, .link {
+            appearance: none; border: 1px solid #d0d0d0; background: #fff; color: #222;
+            border-radius: 6px; padding: 8px 12px; font-size: 14px; cursor: pointer; text-decoration: none;
+        }
+        button.active, .link.primary { background: #075c33; border-color: #075c33; color: #fff; }
+        .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 20px 14px; }
+        .toolbar span { color: #666; font-size: 13px; }
+        .frame-wrap { padding: 0 20px 24px; }
+        iframe {
+            display: block; width: 390px; max-width: 100%; height: 78vh; min-height: 560px;
+            border: 1px solid #ddd; background: #fff; border-radius: 8px;
+        }
+        iframe.desktop { width: 860px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>无忧退协议最终稿预览</h1>
+        <p class="note">非正式上线文件。可用下方宽度切换看手机和桌面效果，也可以新标签打开整页。</p>
+    </header>
+    <nav>
+        <button type="button" class="active" data-page="notice.html">超级会员购买须知</button>
+        <button type="button" data-page="agreement.html">付费会员服务协议</button>
+        <a class="link" id="open-page" href="notice.html" target="_blank" rel="noopener">新标签打开当前页</a>
+    </nav>
+    <div class="toolbar">
+        <span>预览宽度</span>
+        <button type="button" class="active" data-width="390">390 手机</button>
+        <button type="button" data-width="430">430</button>
+        <button type="button" data-width="860">860 桌面</button>
+    </div>
+    <div class="frame-wrap">
+        <iframe id="preview" title="协议预览" src="notice.html"></iframe>
+    </div>
+    <script>
+        const frame = document.getElementById("preview");
+        const openPage = document.getElementById("open-page");
+        const pageButtons = document.querySelectorAll("button[data-page]");
+        const widthButtons = document.querySelectorAll("button[data-width]");
+
+        pageButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                pageButtons.forEach((item) => item.classList.remove("active"));
+                button.classList.add("active");
+                frame.src = button.dataset.page;
+                openPage.href = button.dataset.page;
+            });
+        });
+
+        widthButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                widthButtons.forEach((item) => item.classList.remove("active"));
+                button.classList.add("active");
+                const width = button.dataset.width;
+                frame.style.width = width + "px";
+                frame.classList.toggle("desktop", width === "860");
+            });
+        });
+    </script>
+</body>
+</html>
